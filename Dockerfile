@@ -1,20 +1,11 @@
-# Use the official Python 3.10 image as the base image
-FROM python:3.10
+# Use a lightweight web server as the base image
+FROM nginx:alpine
 
-# Set the working directory inside the container
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/share/nginx/html
 
-# Copy the requirements file to the working directory
-COPY requirements.txt .
+# Copy the HTML file into the container
+COPY index.html .
 
-# Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application code to the working directory
-COPY . .
-
-# Expose the port on which the Flask app will run
-EXPOSE 5000
-
-# Specify the command to run the application
-CMD [ "python", "app.py" ]
+# Expose the default HTTP port
+EXPOSE 80
