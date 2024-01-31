@@ -20,5 +20,5 @@ jobs:
       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
     - name: Push Docker image
-      run: docker push wissamrh/wissamrh:${{ github.sha }}
+      run: docker push wissamrh/wissamrh:latest
 
