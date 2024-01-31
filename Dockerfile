@@ -9,7 +9,6 @@ COPY . .
 
 # Expose the default HTTP port
 EXPOSE 80
----
 # Use an official MySQL runtime as a parent image
 FROM mysql:latest
 
