@@ -1,17 +1,16 @@
-# Stage 1: Build PHPMyAdmin and required packages
-FROM alpine:latest AS builder
+# Use an official PHP runtime as a parent image
+FROM php:alpine as builder
 
-RUN apk --no-cache add wget php7-apache2 php7 php7-mysqli
-
-ENV PHPMYADMIN_VERSION=5.1.3
-RUN mkdir /phpmyadmin \
-    && wget -O /phpmyadmin/phpMyAdmin.tar.gz https://www.phpmyadmin.net/downloads/phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz \
+RUN apk add --no-cache apache2 php-apache2 php7-mysqli \
+    && mkdir /phpmyadmin \
+    && wget -O /phpmyadmin/phpMyAdmin.tar.gz https://www.phpmyadmin.net/downloads/phpMyAdmin-5.1.3-all-languages.tar.gz \
     && tar xz --strip-components 1 -C /phpmyadmin -f /phpmyadmin/phpMyAdmin.tar.gz \
     && rm -rf /phpmyadmin/setup/ /phpmyadmin/phpMyAdmin.tar.gz
 
-# Stage 2: Use the official MySQL image and copy PHPMyAdmin
+# Use an official MySQL runtime as a parent image
 FROM mysql:latest
 
+# Copy PHPMyAdmin from the builder stage
 COPY --from=builder /phpmyadmin /var/www/html/phpmyadmin
 
 # Set the MySQL root password
