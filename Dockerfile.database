@@ -10,10 +10,8 @@ ENV MYSQL_USER=myuser
 ENV MYSQL_PASSWORD=mypassword
 
 # Install required packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends apache2 php libapache2-mod-php php-mysql \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update \
+    && apk add --no-cache apache2 php7-apache2 php7 php7-mysqli
 
 # When container starts, execute the following SQL script
 COPY ./init.sql /docker-entrypoint-initdb.d/
@@ -21,8 +19,9 @@ COPY ./init.sql /docker-entrypoint-initdb.d/
 # Install PHPMyAdmin
 ENV PHPMYADMIN_VERSION=5.1.3
 RUN mkdir /var/www/html/phpmyadmin \
-    && curl -L https://www.phpmyadmin.net/downloads/phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz | tar xz --strip-components 1 -C /var/www/html/phpmyadmin \
-    && rm -rf /var/www/html/phpmyadmin/setup/
+    && wget -O /var/www/html/phpmyadmin/phpMyAdmin.tar.gz https://www.phpmyadmin.net/downloads/phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz \
+    && tar xz --strip-components 1 -C /var/www/html/phpmyadmin -f /var/www/html/phpmyadmin/phpMyAdmin.tar.gz \
+    && rm -rf /var/www/html/phpmyadmin/setup/ /var/www/html/phpmyadmin/phpMyAdmin.tar.gz
 
 # Configure Apache for PHPMyAdmin
 COPY phpmyadmin.conf /etc/apache2/sites-available/
@@ -36,4 +35,4 @@ RUN a2ensite phpmyadmin.conf \
 EXPOSE 80
 
 # Start Apache
-CMD ["apache2-foreground"]
+CMD ["httpd", "-D", "FOREGROUND"]
