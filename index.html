@@ -14,10 +14,55 @@
     <!-- Button that redirects to second.html when clicked -->
     <button onclick="redirectToSecondPage()">Go to Second Page</button>
 
+    <!-- Form to collect phone name and password -->
+    <form id="loginForm">
+        <label for="phoneName">Phone Name:</label>
+        <input type="text" id="phoneName" name="phoneName" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
     <script>
         function redirectToSecondPage() {
             // Redirect to second.html
             window.location.href = 'second.html';
+        }
+
+        function submitForm() {
+            // Get form data
+            var phoneName = document.getElementById('phoneName').value;
+            var password = document.getElementById('password').value;
+
+            // Send data to the server (you need to implement this part)
+            sendDataToServer(phoneName, password);
+        }
+
+        function sendDataToServer(phoneName, password) {
+            // Send the data to your backend server (e.g., using fetch or XMLHttpRequest)
+            // You'll need to implement this part in a separate backend server
+            // Here, we assume an endpoint /api/login for demonstration purposes
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    phoneName: phoneName,
+                    password: password
+                })
+            }).then(response => {
+                // Handle the response from the server
+                if (response.ok) {
+                    console.log('Data sent successfully');
+                } else {
+                    console.error('Failed to send data');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 
