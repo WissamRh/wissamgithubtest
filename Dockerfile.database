@@ -1,4 +1,4 @@
-# Use the official MySQL image
+# Use an official MySQL runtime as a parent image
 FROM mysql:latest
 
 # Set the MySQL root password
@@ -9,20 +9,5 @@ ENV MYSQL_DATABASE=mydatabase
 ENV MYSQL_USER=myuser
 ENV MYSQL_PASSWORD=mypassword
 
-# When the container starts, execute the following SQL script
+# When container starts, execute the following SQL script
 COPY ./init.sql /docker-entrypoint-initdb.d/
-
-# Expose MySQL port
-EXPOSE 3306
-
-
-# Use the official PHPMyAdmin image
-FROM phpmyadmin/phpmyadmin:latest
-
-# Set PHPMyAdmin configurations
-ENV PMA_HOST=mysql
-ENV PMA_USER=myuser
-ENV PMA_PASSWORD=mypassword
-
-# Expose PHPMyAdmin port
-EXPOSE 80
