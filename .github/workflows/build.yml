@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Deploy
 
 on:
   push:
@@ -21,3 +21,21 @@ jobs:
 
     - name: Push Docker image
       run: docker push wissamrh/wissamrh:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy HTML and Node.js server
+      run: |
+        npm install
+        export NODE_ENV=production
+        node server.js &
+
+    - name: Wait for server to start
+      run: sleep 10
