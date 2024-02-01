@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  website:
+    build:
+      context: ./website
+    image: your-website-image
+    ports:
+      - "80:80"
+    depends_on:
+      - database
+
+  database:
+    image: your-database-image
+    environment:
+      # Specify database environment variables (e.g., DB_HOST, DB_USER, DB_PASSWORD, etc.)
+    ports:
+      - "3306:3306"  # Adjust the port based on your database type
