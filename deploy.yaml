@@ -75,4 +75,4 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
-      generateName: wissamrh-db-pod-
+    generateName: wissamrh-db-pod-
