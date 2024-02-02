@@ -13,12 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set COMMIT_HASH variable
-      run: echo "COMMIT_HASH=${{ github.sha }}" >> $GITHUB_ENV
-
-    - name: Display COMMIT_HASH
-      run: echo "COMMIT_HASH is $COMMIT_HASH"
-
     - name: Build App Docker image
       run: docker build -t wissamrh/wissamrh:latest .
 
