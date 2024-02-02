@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:${{ github.sha }}
+        image: wissamrh/wissamrh:${IMAGE_TAG}
         ports:
         - containerPort: 80
         imagePullPolicy: Always  # This ensures the latest image is always pulled
@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:${{ github.sha }}
+        image: wissamrh/mysql:${IMAGE_TAG}
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
@@ -75,4 +75,4 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
-        imagePullPolicy: Always  # This ensures the latest image is always pulled
+     
