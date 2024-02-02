@@ -38,6 +38,8 @@ spec:
         env:
         - name: COMMIT_HASH
           value: "${{ github.sha }}"
+      # Add a comment with commit information
+      # Commit Hash: ${{ github.sha }}
 
 ---
 apiVersion: v1
@@ -80,3 +82,5 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
+      # Add a comment with commit information
+      # Commit Hash: ${{ github.sha }}
