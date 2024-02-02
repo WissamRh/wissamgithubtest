@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: wissamrh-web-deployment
 spec:
-  replicas: 1
+  replicas: 3  # Set the desired number of replicas
   selector:
     matchLabels:
       app: wissamrh-web
@@ -27,13 +27,12 @@ spec:
       labels:
         app: wissamrh-web
     spec:
-      restartPolicy: Always
       containers:
       - name: wissamrh-container
         image: wissamrh/wissamrh:latest
         ports:
         - containerPort: 80
-        imagePullPolicy: Always  # Add this line
+  generateName: wissamrh-web-pod-
 
 ---
 apiVersion: v1
@@ -55,7 +54,7 @@ kind: Deployment
 metadata:
   name: wissamrh-db-deployment
 spec:
-  replicas: 1
+  replicas: 3  # Set the desired number of replicas
   selector:
     matchLabels:
       app: wissamrh-db
@@ -64,7 +63,6 @@ spec:
       labels:
         app: wissamrh-db
     spec:
-      restartPolicy: Always
       containers:
       - name: mysql-container
         image: wissamrh/mysql:latest
@@ -77,4 +75,4 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
-        imagePullPolicy: Always  # Add this line
+  generateName: wissamrh-db-pod-
