@@ -18,11 +18,11 @@ pipeline {
                         def appImage = "wissamrh/wissamrh:${COMMIT_HASH}"
                         def dbImage = "wissamrh/mysql:${COMMIT_HASH}"
 
-                        // Read and replace in deploy.yaml using PowerShell
-                        bat "Get-Content deploy.yaml | ForEach-Object { \$_ -replace 'wissamrh/wissamrh:latest', '$appImage' -replace 'wissamrh/mysql:latest', '$dbImage' } | Set-Content temp-deploy.yaml"
-                        
-                        // Apply modified deployment file
-                        bat "kubectl --token $api_token --server http://127.0.0.1:8001 --insecure-skip-tls-verify=true apply -f temp-deploy.yaml"
+                        // Use PowerShell commands within the bat step
+                        bat """
+                            Get-Content deploy.yaml | ForEach-Object { \$_ -replace 'wissamrh/wissamrh:latest', '$appImage' -replace 'wissamrh/mysql:latest', '$dbImage' } | Set-Content temp-deploy.yaml
+                            kubectl --token $api_token --server http://127.0.0.1:8001 --insecure-skip-tls-verify=true apply -f temp-deploy.yaml
+                        """
                     }
                 }
             }
