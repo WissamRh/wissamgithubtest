@@ -13,17 +13,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set commit hash as an environment variable
+      run: echo "COMMIT_HASH=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+
     - name: Build App Docker image
-      run: docker build -t wissamrh/wissamrh:latest1 .
+      run: docker build -t wissamrh/wissamrh:${{ env.COMMIT_HASH }} .
 
     - name: Build Database Docker image
-      run: docker build -t wissamrh/mysql:latest -f Dockerfile.database .
+      run: docker build -t wissamrh/mysql:${{ env.COMMIT_HASH }} -f Dockerfile.database .
 
     - name: Log in to Docker Hub
       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
     - name: Push App Docker image
-      run: docker push wissamrh/wissamrh:latest1
+      run: docker push wissamrh/wissamrh:${{ env.COMMIT_HASH }}
 
     - name: Push Database Docker image
-      run: docker push wissamrh/mysql:latest
+      run: docker push wissamrh/mysql:${{ env.COMMIT_HASH }}
