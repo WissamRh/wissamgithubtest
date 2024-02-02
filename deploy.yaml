@@ -27,12 +27,13 @@ spec:
       labels:
         app: wissamrh-web
     spec:
-      restartPolicy: Always  # Add this line
+      restartPolicy: Always
       containers:
       - name: wissamrh-container
         image: wissamrh/wissamrh:latest
         ports:
         - containerPort: 80
+        imagePullPolicy: Always  # Add this line
 
 ---
 apiVersion: v1
@@ -63,7 +64,7 @@ spec:
       labels:
         app: wissamrh-db
     spec:
-      restartPolicy: Always  # Add this line
+      restartPolicy: Always
       containers:
       - name: mysql-container
         image: wissamrh/mysql:latest
@@ -76,3 +77,4 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
+        imagePullPolicy: Always  # Add this line
