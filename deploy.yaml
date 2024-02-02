@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: wissamrh-web-deployment
   annotations:
-    force-redeploy: "{{TIMESTAMP}}"  # Update this timestamp to force redeployment
+    commit-hash: "${COMMIT_HASH}"  # Replace with the correct environment variable for your CI/CD system
 spec:
   replicas: 1
   selector:
@@ -34,6 +34,10 @@ spec:
         image: wissamrh/wissamrh:latest
         ports:
         - containerPort: 80
+        # Add an environment variable for commit hash
+        env:
+        - name: COMMIT_HASH
+          value: "${COMMIT_HASH}"
 
 ---
 apiVersion: v1
