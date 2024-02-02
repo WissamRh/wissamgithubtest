@@ -32,7 +32,7 @@ spec:
         image: wissamrh/wissamrh:latest
         ports:
         - containerPort: 80
-      generateName: wissamrh-web-pod-
+    generateName: wissamrh-web-pod-
 
 ---
 apiVersion: v1
