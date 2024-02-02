@@ -4,7 +4,7 @@ pipeline {
         stage('Retrieve Commit Hash') {
             steps {
                 script {
-                    COMMIT_HASH = bat(script: 'git rev-parse --short HEAD', returnStatus: true).trim()
+                    COMMIT_HASH = bat(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
             }
         }
