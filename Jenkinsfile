@@ -25,5 +25,5 @@ pipeline {
 
 def isGitChange() {
     // Check if there are changes in the Git repository
-    return sh(script: 'git diff --quiet HEAD', returnStatus: true) != 0
+    return bat(script: 'git diff --quiet HEAD', returnStatus: true) != 0
 }
