@@ -1,0 +1,76 @@
+# wissamrh-combined-deployment-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wissamrh-web-service
+spec:
+  selector:
+    app: wissamrh-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wissamrh-web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wissamrh-web
+  template:
+    metadata:
+      labels:
+        app: wissamrh-web
+    spec:
+      containers:
+      - name: wissamrh-container
+        image: wissamrh/wissamrh:latest
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wissamrh-db-service
+spec:
+  selector:
+    app: wissamrh-db
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wissamrh-db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wissamrh-db
+  template:
+    metadata:
+      labels:
+        app: wissamrh-db
+    spec:
+      containers:
+      - name: mysql-container
+        image: wissamrh/mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        - name: MYSQL_DATABASE
+          value: mydatabase
+        - name: MYSQL_USER
+          value: myuser
+        - name: MYSQL_PASSWORD
+          value: mypassword
