@@ -37,7 +37,7 @@ spec:
         # Add an environment variable for commit hash
         env:
         - name: COMMIT_HASH
-          value: "${COMMIT_HASH}"
+          value: "${{ github.sha }}"
 
 ---
 apiVersion: v1
