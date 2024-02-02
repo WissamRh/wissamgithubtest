@@ -29,11 +29,10 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:${IMAGE_TAG}
+        image: wissamrh/wissamrh:latest
         ports:
         - containerPort: 80
-        imagePullPolicy: Always  # This ensures the latest image is always pulled
-
+      
 ---
 apiVersion: v1
 kind: Service
@@ -65,7 +64,7 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:${IMAGE_TAG}
+        image: wissamrh/mysql:latest
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
