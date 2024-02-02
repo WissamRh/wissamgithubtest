@@ -13,6 +13,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set COMMIT_HASH variable
+      run: echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV  
+
     - name: Build App Docker image
       run: docker build -t wissamrh/wissamrh:latest .
 
