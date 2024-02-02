@@ -17,6 +17,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wissamrh-web-deployment
+  annotations:
+    force-redeploy: "{{TIMESTAMP}}"  # Update this timestamp to force redeployment
 spec:
   replicas: 1
   selector:
