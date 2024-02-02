@@ -14,16 +14,16 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build App Docker image
-      run: docker build -t wissamrh/wissamrh:latest .
+      run: docker build -t wissamrh/wissamrh:${{ github.sha }} .
 
     - name: Build Database Docker image
-      run: docker build -t wissamrh/mysql:latest -f Dockerfile.database .
+      run: docker build -t wissamrh/mysql:${{ github.sha }} -f Dockerfile.database .
 
     - name: Log in to Docker Hub
       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
     - name: Push App Docker image
-      run: docker push wissamrh/wissamrh:latest
+      run: docker push wissamrh/wissamrh:${{ github.sha }}
 
     - name: Push Database Docker image
-      run: docker push wissamrh/mysql:latest
+      run: docker push wissamrh/mysql:${{ github.sha }}
