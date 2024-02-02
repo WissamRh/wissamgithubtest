@@ -1,4 +1,4 @@
-# wissamrh-combined-deployment-service.yaml
+# deploy.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: wissamrh-web-deployment
 spec:
-  replicas: 3  # Set the desired number of replicas
+  replicas: 3
   selector:
     matchLabels:
       app: wissamrh-web
@@ -32,7 +32,7 @@ spec:
         image: wissamrh/wissamrh:latest
         ports:
         - containerPort: 80
-  generateName: wissamrh-web-pod-
+      generateName: wissamrh-web-pod-
 
 ---
 apiVersion: v1
@@ -54,7 +54,7 @@ kind: Deployment
 metadata:
   name: wissamrh-db-deployment
 spec:
-  replicas: 3  # Set the desired number of replicas
+  replicas: 3
   selector:
     matchLabels:
       app: wissamrh-db
@@ -75,4 +75,4 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
-  generateName: wissamrh-db-pod-
+      generateName: wissamrh-db-pod-
