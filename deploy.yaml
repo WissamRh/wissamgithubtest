@@ -1,7 +1,7 @@
 # wissamrh-combined-deployment-service.yaml
-variables:
-  Tag: latest
-  
+variables: &variables
+  imageTag: latest
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:${variables.Tag}
+        image: wissamrh/wissamrh:*{{ variables.imageTag }}*
         ports:
         - containerPort: 80
 
@@ -67,7 +67,7 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:${variables.Tag}
+        image: wissamrh/mysql:*{{ variables.imageTag }}*
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
