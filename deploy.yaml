@@ -1,4 +1,11 @@
 # wissamrh-combined-deployment-service.yaml
+
+{{- if exists "variables.yaml" }}
+{{- $vars := file "variables.yaml" | fromYaml }}
+{{- else }}
+{{- $vars := dict "webImageTag" "latest" "dbImageTag" "latest" }}
+{{- end }}
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,15 +36,9 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:${MY_VERSION}
+        image: wissamrh/wissamrh:{{$vars.webImageTag}}
         ports:
         - containerPort: 80
-        env:
-        - name: MY_VERSION
-          valueFrom:
-            configMapKeyRef:
-              name: my-config
-              key: version
 
 ---
 apiVersion: v1
@@ -70,12 +71,8 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:${MY_VERSION}
+        image: wissamrh/mysql:{{$vars.dbImageTag}}
         env:
-        - name: MY_VERSION
-          valueFrom:
-            configMapKeyRef:
-              name: my-config
         - name: MYSQL_ROOT_PASSWORD
           value: root
         - name: MYSQL_DATABASE
