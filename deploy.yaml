@@ -74,3 +74,38 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wissamrh-phpmyadmin-service
+spec:
+  selector:
+    app: wissamrh-phpmyadmin
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wissamrh-phpmyadmin-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wissamrh-phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: wissamrh-phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin-container
+        image: wissamrh/phpmyadmin:1.0.130
+        ports:
+        - containerPort: 80
