@@ -31,6 +31,4 @@ jobs:
     - name: Push Database Docker image
       run: docker push wissamrh/mysql:${{ env.VERSION }}
 
-    - name: Update ConfigMap Locally
-      run: |
-        sed -i "s/version: .*/version: \"${VERSION}\"/" configmap.yaml
+   
