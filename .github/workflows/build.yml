@@ -33,4 +33,4 @@ jobs:
 
     - name: Update ConfigMap Locally
       run: |
-        sed -i "s/app_version: .*/app_version: \"${VERSION}\"/" configmap.yaml
+        sed -i "s/version: .*/version: \"${VERSION}\"/" configmap.yaml
