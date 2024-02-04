@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:latest
+        image: wissamrh/wissamrh:1.0.112
         ports:
         - containerPort: 80
 
