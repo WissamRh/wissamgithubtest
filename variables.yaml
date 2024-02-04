@@ -1,0 +1,3 @@
+# image_tags.yaml
+webImageTag: ${{ env.WEB_IMAGE_TAG }}
+dbImageTag: ${{ env.DB_IMAGE_TAG }}
