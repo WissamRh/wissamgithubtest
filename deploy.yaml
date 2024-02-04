@@ -29,9 +29,15 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:1.0.112
+        image: wissamrh/wissamrh:${MY_VERSION}
         ports:
         - containerPort: 80
+        env:
+        - name: MY_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: version
 
 ---
 apiVersion: v1
@@ -64,8 +70,12 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:latest
+        image: wissamrh/mysql:${MY_VERSION}
         env:
+        - name: MY_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
         - name: MYSQL_ROOT_PASSWORD
           value: root
         - name: MYSQL_DATABASE
