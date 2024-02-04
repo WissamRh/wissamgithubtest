@@ -1,0 +1,13 @@
+# Use an official phpMyAdmin image as base
+FROM phpmyadmin/phpmyadmin:latest
+
+# Set environment variables, if needed
+# ENV VARIABLE_NAME=value
+
+# You can add any additional configurations or settings here
+
+# The port phpMyAdmin will run on
+EXPOSE 80
+
+# Start phpMyAdmin
+CMD ["apache2-foreground"]
