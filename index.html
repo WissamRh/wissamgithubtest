@@ -3,57 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save Phone and Website</title>
+    <title>Simple Form</title>
 </head>
 <body>
 
-<h2>Save Phone and Website</h2>
+    <h2>Enter your information</h2>
 
-<form id="saveForm">
-    <label for="phoneNumber">Phone Number:</label>
-    <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]{10}" placeholder="Enter 10-digit phone number">
+    <form id="myForm" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-    <br>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
 
-    <label for="website">Website:</label>
-    <input type="text" id="website" name="website" required placeholder="Enter website URL">
+        <button type="button" onclick="submitForm()">Submit and Redirect</button>
+        <button type="button" onclick="redirectToSecondPage()">Just Redirect</button>
+    </form>
 
-    <br>
+    <script>
+        function submitForm() {
+            // Add any form validation logic here if needed
+            document.getElementById("myForm").action = "process.php";
+            document.getElementById("myForm").submit();
+        }
 
-    <button type="button" onclick="saveData()">Save Data</button>
-</form>
-
-<!-- Button to navigate to second.html -->
-<button onclick="window.location.href='second.html'">Go to Second Page</button>
-
-<script>
-    function saveData() {
-        var phoneNumber = document.getElementById("phoneNumber").value;
-        var website = document.getElementById("website").value;
-
-        // You can send the data to your backend for storage
-        // Example: Use fetch() to send a POST request to your server
-        fetch('your_backend_endpoint', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                phoneNumber: phoneNumber,
-                website: website,
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            // Handle success response if needed
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            // Handle error if needed
-        });
-    }
-</script>
+        function redirectToSecondPage() {
+            window.location.href = "second.html";
+        }
+    </script>
 
 </body>
 </html>
