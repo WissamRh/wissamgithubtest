@@ -35,7 +35,7 @@ jobs:
       run: docker build -t wissamrh/mysql:${{ env.VERSION }} -f Dockerfile.database .
 
     - name: Build phpMyAdmin Docker image
-      run: docker build -t wissamrh/phpmyadmin:${{ env.VERSION }} -f Dockerfile.phpmyadmin .
+      run: docker build -t wissamrh/php:${{ env.VERSION }} -f Dockerfile.phpmyadmin .
 
     - name: Log in to Docker Hub
       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
@@ -47,4 +47,4 @@ jobs:
       run: docker push wissamrh/mysql:${{ env.VERSION }}
 
     - name: Push phpMyAdmin Docker image
-      run: docker push wissamrh/phpmyadmin:${{ env.VERSION }}
+      run: docker push wissamrh/php:${{ env.VERSION }}
