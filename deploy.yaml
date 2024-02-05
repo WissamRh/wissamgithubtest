@@ -104,10 +104,10 @@ spec:
     spec:
       containers:
       - name: phpmyadmin-container
-        image: wissamrh/php:1.0.144
+        image: wissamrh/php:1.0.141
         ports:
         - containerPort: 80
-      env:
+        env:
         - name: PMA_HOST
           value: wissamrh-db-service # Use the service name for MySQL
         - name: PMA_USER
