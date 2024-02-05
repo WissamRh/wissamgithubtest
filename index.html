@@ -1,71 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
+    <title>Save Phone and Website</title>
 </head>
-
 <body>
 
-    <h1>Welcome to the Index Page</h1>
+<h2>Save Phone and Website</h2>
 
-    <!-- Button that redirects to second.html when clicked -->
-    <button onclick="redirectToSecondPage()">Go to Second Page</button>
+<form id="saveForm">
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]{10}" placeholder="Enter 10-digit phone number">
 
-    <!-- Form to collect phone name and password -->
-    <form id="loginForm">
-        <label for="phoneName">Phone Name:</label>
-        <input type="text" id="phoneName" name="phoneName" required>
+    <br>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+    <label for="website">Website:</label>
+    <input type="text" id="website" name="website" required placeholder="Enter website URL">
 
-        <button type="button" onclick="submitForm()">Submit</button>
-    </form>
+    <br>
 
-    <script>
-        function redirectToSecondPage() {
-            // Redirect to second.html
-            window.location.href = 'second.html';
-        }
+    <button type="button" onclick="saveData()">Save Data</button>
+</form>
 
-        function submitForm() {
-            // Get form data
-            var phoneName = document.getElementById('phoneName').value;
-            var password = document.getElementById('password').value;
+<!-- Button to navigate to second.html -->
+<button onclick="window.location.href='second.html'">Go to Second Page</button>
 
-            // Send data to the server (you need to implement this part)
-            sendDataToServer(phoneName, password);
-        }
+<script>
+    function saveData() {
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var website = document.getElementById("website").value;
 
-        function sendDataToServer(phoneName, password) {
-            // Send the data to your backend server (e.g., using fetch or XMLHttpRequest)
-            // You'll need to implement this part in a separate backend server
-            // Here, we assume an endpoint /api/login for demonstration purposes
-            fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    phoneName: phoneName,
-                    password: password
-                })
-            }).then(response => {
-                // Handle the response from the server
-                if (response.ok) {
-                    console.log('Data sent successfully');
-                } else {
-                    console.error('Failed to send data');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    </script>
+        // You can send the data to your backend for storage
+        // Example: Use fetch() to send a POST request to your server
+        fetch('your_backend_endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                phoneNumber: phoneNumber,
+                website: website,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle success response if needed
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle error if needed
+        });
+    }
+</script>
 
 </body>
-
 </html>
