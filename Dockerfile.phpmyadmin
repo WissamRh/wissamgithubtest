@@ -1,10 +1,10 @@
 # Use an official phpMyAdmin image as base
 FROM phpmyadmin/phpmyadmin:latest
 
-# Set environment variables, if needed
-# ENV VARIABLE_NAME=value
-
-# You can add any additional configurations or settings here
+# Set environment variables for MySQL connection
+ENV PMA_HOST=mysql
+ENV PMA_USER=myuser
+ENV PMA_PASSWORD=mypassword
 
 # The port phpMyAdmin will run on
 EXPOSE 80
