@@ -1,4 +1,3 @@
-# wissamrh-combined-deployment-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,7 +28,7 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:1.0.139
+        image: wissamrh/wissamrh:1.0.142
         ports:
         - containerPort: 80
 
@@ -45,8 +44,7 @@ spec:
     - protocol: TCP
       port: 3306
       targetPort: 3306
-  type: NodePort
-
+  type: ClusterIP # Change to ClusterIP, as you don't need external access
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -64,7 +62,7 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:1.0.139
+        image: wissamrh/mysql:1.0.142
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
@@ -106,6 +104,13 @@ spec:
     spec:
       containers:
       - name: phpmyadmin-container
-        image: wissamrh/php:1.0.141
+        image: wissamrh/php:1.0.142
         ports:
         - containerPort: 80
+      env:
+        - name: PMA_HOST
+          value: wissamrh-db-service # Use the service name for MySQL
+        - name: PMA_USER
+          value: myuser
+        - name: PMA_PASSWORD
+          value: mypassword
