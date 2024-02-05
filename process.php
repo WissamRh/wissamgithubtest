@@ -1,7 +1,7 @@
 <?php
-$servername = "mysql";
-$username = "wissam";
-$password = "hassan";
+$servername = "wissamrh-db-service";
+$username = "myuser"; // Update this to match the MYSQL_USER in the YAML file
+$password = "mypassword"; // Update this to match the MYSQL_PASSWORD in the YAML file
 $database = "mydatabase";
 
 // Create connection
