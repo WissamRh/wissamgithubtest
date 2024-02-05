@@ -1,39 +1,28 @@
 <?php
-$servername = "wissamrh-db-service";
-$username = "myuser"; // Update this to match the MYSQL_USER in the YAML file
-$password = "mypassword"; // Update this to match the MYSQL_PASSWORD in the YAML file
-$database = "mydatabase";
+$servername = "wissamrh-db-service"; // Change to your MySQL service name
+$username = "myuser"; // Change to your MySQL username
+$password = "mypassword"; // Change to your MySQL password
+$dbname = "mydatabase"; // Change to your MySQL database name
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Create the table if it doesn't exist
-$tableQuery = "CREATE TABLE IF NOT EXISTS user_data (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL
-)";
-
-if ($conn->query($tableQuery) === FALSE) {
-    echo "Error creating table: " . $conn->error;
-}
-
-// Get values from the form
+// Get form data
 $name = $_POST['name'];
 $phone = $_POST['phone'];
 
-// Insert data into MySQL
-$insertQuery = "INSERT INTO user_data (name, phone) VALUES ('$name', '$phone')";
+// SQL to insert data into the table
+$sql = "INSERT INTO mytable (name, phone) VALUES ('$name', '$phone')";
 
-if ($conn->query($insertQuery) === TRUE) {
-    echo "Record created successfully";
+if ($conn->query($sql) === TRUE) {
+    echo "Record inserted successfully";
 } else {
-    echo "Error: " . $insertQuery . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 // Close connection
