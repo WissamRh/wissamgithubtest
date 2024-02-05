@@ -9,24 +9,18 @@
 
     <h2>Enter your information</h2>
 
-    <form id="myForm" method="post">
+    <form id="myForm" method="post" action="process.php">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
         <label for="phone">Phone Number:</label>
         <input type="tel" id="phone" name="phone" required>
 
-        <button type="button" onclick="submitForm()">Submit and Redirect</button>
+        <button type="submit">Submit and Redirect</button>
         <button type="button" onclick="redirectToSecondPage()">Just Redirect</button>
     </form>
 
     <script>
-        function submitForm() {
-            // Add any form validation logic here if needed
-            document.getElementById("myForm").action = "process.php";
-            document.getElementById("myForm").submit();
-        }
-
         function redirectToSecondPage() {
             window.location.href = "second.html";
         }
