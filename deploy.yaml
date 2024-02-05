@@ -104,7 +104,7 @@ spec:
     spec:
       containers:
       - name: phpmyadmin-container
-        image: wissamrh/php:1.0.141
+        image: wissamrh/php:1.0.146
         ports:
         - containerPort: 80
         env:
