@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:1.0.126
+        image: wissamrh/wissamrh:1.0.132
         ports:
         - containerPort: 80
 
@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:1.0.126
+        image: wissamrh/mysql:1.0.132
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
@@ -106,6 +106,6 @@ spec:
     spec:
       containers:
       - name: phpmyadmin-container
-        image: wissamrh/phpmyadmin:1.0.130
+        image: wissamrh/phpmyadmin:1.0.132
         ports:
         - containerPort: 80
