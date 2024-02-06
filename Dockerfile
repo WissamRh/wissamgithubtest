@@ -17,7 +17,7 @@ FROM php:7-fpm AS webserver
 WORKDIR /usr/share/nginx/html
 
 # Install any additional PHP extensions if needed
-# RUN docker-php-ext-install ...
+RUN docker-php-ext-install ...
 
 # Copy website files from the build context into the container
 COPY . .
