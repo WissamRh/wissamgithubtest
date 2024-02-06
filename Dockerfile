@@ -22,6 +22,9 @@ COPY . .
 # Copy nginx configuration file from the same directory as Dockerfile
 COPY nginx.conf .
 
+# Copy PHP files from the same directory as Dockerfile
+COPY process.php .
+
 # Expose the default HTTP port
 EXPOSE 80 
 
@@ -33,6 +36,9 @@ COPY --from=webserver /usr/share/nginx/html /usr/share/nginx/html
 
 # Copy nginx configuration file from the same directory as Dockerfile
 COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy PHP files from the same directory as Dockerfile
+COPY --from=webserver /usr/share/nginx/html/process.php /usr/share/nginx/html/process.php
 
 # Expose the default HTTP port
 EXPOSE 80
