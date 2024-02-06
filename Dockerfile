@@ -19,6 +19,9 @@ WORKDIR /usr/share/nginx/html
 # Copy website files from the build context into the container
 COPY . .
 
+# Copy nginx configuration file from the same directory as Dockerfile
+COPY nginx.conf .
+
 # Expose the default HTTP port
 EXPOSE 80 
 
@@ -27,6 +30,9 @@ FROM nginx:alpine
 
 # Copy files from the webserver stage
 COPY --from=webserver /usr/share/nginx/html /usr/share/nginx/html
+
+# Copy nginx configuration file from the same directory as Dockerfile
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose the default HTTP port
 EXPOSE 80
