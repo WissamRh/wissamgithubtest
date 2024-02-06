@@ -17,13 +17,13 @@ FROM php:7-fpm AS webserver
 WORKDIR /usr/share/nginx/html
 
 # Install any additional PHP extensions if needed
-RUN docker-php-ext-install ...
+# RUN docker-php-ext-install ...
 
 # Copy website files from the build context into the container
 COPY . .
 
 # Copy custom PHP configuration
-COPY php.ini /etc/php/php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
 # Stage 3: Final stage
 FROM nginx:alpine AS final
