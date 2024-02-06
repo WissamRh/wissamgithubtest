@@ -24,7 +24,7 @@ COPY nginx.conf .
 
 # Copy PHP files from the same directory as Dockerfile
 COPY process.php .
-COPY phpinfo.php . # Add phpinfo.php here
+COPY phpinfo.php .
 
 # Expose the default HTTP port
 EXPOSE 80 
