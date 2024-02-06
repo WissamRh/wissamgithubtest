@@ -23,7 +23,7 @@ WORKDIR /usr/share/nginx/html
 COPY . .
 
 # Copy custom PHP configuration
-COPY php.ini /usr/local/etc/php/php.ini
+COPY php.ini /etc/php/php.ini
 
 # Stage 3: Final stage
 FROM nginx:alpine AS final
