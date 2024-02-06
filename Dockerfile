@@ -10,7 +10,7 @@ ENV MYSQL_PASSWORD=mypassword
 # Copy the initialization script
 COPY ./init.sql /docker-entrypoint-initdb.d/
 
-# Stage 2: Build web server image
+# Stage 2: Build web server image with PHP support
 FROM nginx:alpine AS webserver
 
 # Set the working directory in the container
@@ -22,6 +22,9 @@ COPY . .
 # Copy nginx configuration file from the same directory as Dockerfile
 COPY nginx.conf .
 
+# Install PHP and PHP-FPM
+RUN apk --no-cache add php7 php7-fpm
+
 # Copy PHP files from the same directory as Dockerfile
 COPY process.php .
 COPY phpinfo.php .
@@ -29,14 +32,17 @@ COPY phpinfo.php .
 # Expose the default HTTP port
 EXPOSE 80 
 
-# Final stage: Create a minimal image with the necessary artifacts
-FROM nginx:alpine
+# Start PHP-FPM service
+CMD ["php-fpm7", "-R"]
 
-# Copy files from the webserver stage
-COPY --from=webserver /usr/share/nginx/html /usr/share/nginx/html
+# Stage 3: Final stage
+FROM webserver AS final
 
 # Copy nginx configuration file from the same directory as Dockerfile
 COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy files from the webserver stage
+COPY --from=webserver /usr/share/nginx/html /usr/share/nginx/html
 
 # Expose the default HTTP port
 EXPOSE 80
