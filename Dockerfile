@@ -11,19 +11,19 @@ ENV MYSQL_PASSWORD=mypassword
 COPY ./init.sql /docker-entrypoint-initdb.d/
 
 # Stage 2: Build web server image with PHP support
-FROM nginx:alpine AS webserver
+FROM nginx:latest AS webserver
 
 # Set the working directory in the container
 WORKDIR /usr/share/nginx/html
+
+# Install PHP and PHP-FPM
+RUN apt-get update && apt-get install -y php-fpm
 
 # Copy website files from the build context into the container
 COPY . .
 
 # Copy nginx configuration file from the same directory as Dockerfile
 COPY nginx.conf .
-
-# Install PHP and PHP-FPM
-RUN apk --no-cache add php7 php7-fpm
 
 # Copy PHP files from the same directory as Dockerfile
 COPY process.php .
@@ -33,7 +33,7 @@ COPY phpinfo.php .
 EXPOSE 80 
 
 # Start PHP-FPM service
-CMD ["php-fpm7", "-R"]
+CMD ["php-fpm", "-R"]
 
 # Stage 3: Final stage
 FROM webserver AS final
