@@ -1,28 +1,11 @@
-# Stage 1: Build PHP image
-FROM php:7.4-apache AS php
+# Use an existing Apache image with PHP support as a base
+FROM php:apache
 
-# Install mysqli extension
-RUN docker-php-ext-install mysqli
-
-# Set working directory
+# Set the working directory in the container
 WORKDIR /var/www/html
 
-# Copy PHP files
-COPY index.php .
-COPY insert.php .
+# Copy HTML and PHP files from the host into the container
+COPY . .
 
-# Stage 2: Build MySQL image
-FROM mysql:latest AS database
-
-# Set environment variables
-ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=mydatabase
-
-# Copy initialization script
-COPY ./init.sql /docker-entrypoint-initdb.d/
-
-# Stage 3: Final stage
-FROM php AS final
-
-# Expose port 80
+# Expose port 80 to the outside world
 EXPOSE 80
