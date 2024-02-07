@@ -1,8 +1,8 @@
 <?php
 // MySQL database configuration
-$servername = "mysql";
-$username = "root";
-$password = "root";
+$servername = "wissamrh-db-service";
+$username = "myuser";
+$password = "mypassword";
 $database = "mydatabase";
 
 // Create connection
