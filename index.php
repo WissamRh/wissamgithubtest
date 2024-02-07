@@ -12,7 +12,7 @@
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
 
-        <label for="phonr">Phone:</label>
+        <label for="phone">Phone:</label>
         <input type="phone" id="phone" name="phone" required><br><br>
 
         <button type="submit">Submit</button>
