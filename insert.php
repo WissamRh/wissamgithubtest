@@ -18,7 +18,7 @@ $name = $_POST['name'];
 $email = $_POST['email'];
 
 // Insert data into MySQL database
-$sql = "INSERT INTO users (name, email) VALUES ('$name', '$email')";
+$sql = "INSERT INTO users (name, phone) VALUES ('$name', '$phone')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
