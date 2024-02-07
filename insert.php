@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 // Retrieve form data
 $name = $_POST['name'];
-$email = $_POST['phone'];
+$phone = $_POST['phone'];
 
 // Insert data into MySQL database
 $sql = "INSERT INTO mytable (name, phone) VALUES ('$name', '$phone')";
