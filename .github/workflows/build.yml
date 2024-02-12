@@ -32,7 +32,7 @@ jobs:
       run: docker build -t wissamrh/wissamrh:${{ env.VERSION }} .
 
     - name: Build Database Docker image
-      run: docker build -t wissamrh/mysql:latest -f Dockerfile.database .
+      run: docker build -t wissamrh/mysql:${{ env.VERSION }} -f Dockerfile.database .
 
     - name: Build phpMyAdmin Docker image
       run: docker build -t wissamrh/php:${{ env.VERSION }} -f Dockerfile.phpmyadmin .
@@ -44,7 +44,7 @@ jobs:
       run: docker push wissamrh/wissamrh:${{ env.VERSION }}
 
     - name: Push Database Docker image
-      run: docker push wissamrh/mysql:latest
+      run: docker push wissamrh/mysql:${{ env.VERSION }}latest
 
     - name: Push phpMyAdmin Docker image
       run: docker push wissamrh/php:${{ env.VERSION }}
