@@ -44,7 +44,7 @@ jobs:
       run: docker push wissamrh/wissamrh:${{ env.VERSION }}
 
     - name: Push Database Docker image
-      run: docker push wissamrh/mysql:${{ env.VERSION }}latest
+      run: docker push wissamrh/mysql:${{ env.VERSION }}
 
     - name: Push phpMyAdmin Docker image
       run: docker push wissamrh/php:${{ env.VERSION }}
