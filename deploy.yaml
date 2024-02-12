@@ -46,12 +46,40 @@ spec:
       targetPort: 3306
   type: ClusterIP # Change to ClusterIP, as you don't need external access
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: PersistentVolume
 metadata:
-  name: wissamrh-db-deployment
+  name: database-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  # Add appropriate storage configuration for your environment
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # Reference the previously defined PersistentVolume by name
+  volumeName: database-pv
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wissamrh-db-statefulset
 spec:
   replicas: 1
+  serviceName: wissamrh-db-service
   selector:
     matchLabels:
       app: wissamrh-db
@@ -72,6 +100,17 @@ spec:
           value: myuser
         - name: MYSQL_PASSWORD
           value: mypassword
+        volumeMounts:
+        - name: database-volume
+          mountPath: /var/lib/mysql  # Mount path within the container
+  volumeClaimTemplates:
+  - metadata:
+      name: database-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
 
 ---
 apiVersion: v1
