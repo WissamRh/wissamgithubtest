@@ -58,7 +58,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   # Add appropriate storage configuration for your environment
-  storageClassName: manual
+  storageClassName: standard
 
 ---
 apiVersion: v1
