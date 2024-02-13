@@ -49,16 +49,18 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: database-pv
+  name: mysql-pv
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi  # Adjust the storage capacity as needed
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  # Add appropriate storage configuration for your environment
-  storageClassName: standard
+  storageClassName: standard  # Update with the appropriate storage class name
+  hostPath:
+    path: /var/lib/mysql  # Update with the appropriate host path
+
 
 ---
 apiVersion: v1
@@ -72,7 +74,7 @@ spec:
     requests:
       storage: 1Gi
   # Reference the previously defined PersistentVolume by name
-  volumeName: database-pv
+  volumeName: mysql-pv
 
 ---
 apiVersion: apps/v1
