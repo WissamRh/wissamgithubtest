@@ -6,7 +6,7 @@
     <title>Insert Data</title>
 </head>
 <body>
-    <h2>Insert Data into MySQL Database</h2>
+    <h2>Zoom metting</h2>
 
     <form method="post" action="insert.php">
         <label for="name">Name:</label>
