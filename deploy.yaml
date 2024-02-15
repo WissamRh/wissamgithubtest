@@ -94,12 +94,12 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:2.0.18
+        image: wissamrh/mysql:2.0.22
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
         - name: MYSQL_DATABASE
-          value: mydatabase
+          value: mydatabasewissam
         - name: MYSQL_USER
           value: myuser
         - name: MYSQL_PASSWORD
