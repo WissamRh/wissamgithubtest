@@ -36,10 +36,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wissamrh-db-service
+  name: wissam-db-service
 spec:
   selector:
-    app: wissamrh-db
+    app: wissam-db
   ports:
     - protocol: TCP
       port: 3306
@@ -80,17 +80,17 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: wissamrh-db-statefulset
+  name: wissam-db-statefulset
 spec:
   replicas: 1
-  serviceName: wissamrh-db-service
+  serviceName: wissam-db-service
   selector:
     matchLabels:
-      app: wissamrh-db
+      app: wissam-db
   template:
     metadata:
       labels:
-        app: wissamrh-db
+        app: wissam-db
     spec:
       containers:
       - name: mysql-container
@@ -152,7 +152,7 @@ spec:
         - containerPort: 80
         env:
         - name: PMA_HOST
-          value: wissamrh-db-service # Use the service name for MySQL
+          value: wissam-db-service # Use the service name for MySQL
         - name: PMA_USER
           value: myuser
         - name: PMA_PASSWORD
