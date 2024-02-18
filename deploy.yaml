@@ -80,21 +80,21 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: wissamr-db-statefulset
+  name: wissamh-db-statefulset
 spec:
   replicas: 1
   serviceName: wissam-db-service
   selector:
     matchLabels:
-      app: wissamr-db
+      app: wissamh-db
   template:
     metadata:
       labels:
-        app: wissamr-db
+        app: wissamh-db
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:2.0.40
+        image: wissamrh/mysql:2.0.46
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
