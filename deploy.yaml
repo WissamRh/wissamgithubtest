@@ -94,7 +94,7 @@ spec:
     spec:
       containers:
       - name: mysql-container
-        image: wissamrh/mysql:2.0.31
+        image: wissamrh/mysql:2.0.32
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
