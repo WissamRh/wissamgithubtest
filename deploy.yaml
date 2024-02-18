@@ -83,7 +83,7 @@ metadata:
   name: wissamh-db-statefulset
 spec:
   replicas: 1
-  serviceName: wissam-db-service
+  serviceName: wissamh-db-service
   selector:
     matchLabels:
       app: wissamh-db
