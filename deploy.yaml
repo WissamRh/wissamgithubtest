@@ -36,10 +36,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wissamr-db-service
+  name: wissamh-db-service
 spec:
   selector:
-    app: wissamr-db
+    app: wissamh-db
   ports:
     - protocol: TCP
       port: 3306
@@ -152,7 +152,7 @@ spec:
         - containerPort: 80
         env:
         - name: PMA_HOST
-          value: wissamr-db-service # Use the service name for MySQL
+          value: wissamh-db-service # Use the service name for MySQL
         - name: PMA_USER
           value: myuser
         - name: PMA_PASSWORD
