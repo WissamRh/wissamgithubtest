@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: wissamrh-container
-        image: wissamrh/wissamrh:2.0.77
+        image: wissamrh/wissamrh:2.0.76
         ports:
         - containerPort: 80
 
